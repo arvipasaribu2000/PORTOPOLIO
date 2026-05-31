@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arpin Hamonangan Pasaribu — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050b18;
+    --bg2: #080f20;
+    --surface: rgba(255,255,255,0.04);
+    --surface2: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --cyan: #00d4ff;
+    --cyan2: #00ffe7;
+    --gold: #f5c842;
+    --violet: #8b5cf6;
+    --text: #e8edf5;
+    --text2: #8fa0b8;
+    --text3: #c5d2e0;
+    --accent: #0ff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.65;
+  }
+
+  /* ── CANVAS PARTICLES ── */
+  #canvas-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  /* ── GRID OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(5,11,24,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--cyan);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* ── SECTIONS WRAPPER ── */
+  main { position: relative; z-index: 1; }
+
+  section { padding: 90px 0; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--cyan);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 50px;
+  }
+
+  .highlight {
+    background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--cyan);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  .hero-tag .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .hero-role {
+    font-size: 1.05rem;
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 28px;
+    line-height: 1.8;
+  }
+
+  .hero-role strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--text3);
+    max-width: 560px;
+    margin-bottom: 36px;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan), #0090cc);
+    color: #000;
+    border: none;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,212,255,0.35);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    transform: translateY(-2px);
+  }
+
+  .hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .contact-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text2);
+  }
+  .contact-chip .ico {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  /* ── AVATAR CARD ── */
+  .hero-avatar-wrap {
+    position: relative;
+  }
+
+  .avatar-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(139,92,246,0.08));
+    border: 1px solid rgba(0,212,255,0.18);
+    padding: 3px;
+  }
+
+  .avatar-inner {
+    border-radius: 22px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0b1428, #0d1f38);
+    padding: 32px;
+    text-align: center;
+  }
+
+  .avatar-img {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    border: 3px solid rgba(0,212,255,0.3);
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    overflow: hidden;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .stat-item {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid rgba(0,212,255,0.12);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--cyan);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+    color: var(--text2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* floating decorations */
+  .float-badge {
+    position: absolute;
+    background: rgba(8,15,32,0.9);
+    border: 1px solid rgba(0,212,255,0.25);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--cyan);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+  }
+
+  .float-badge.tl {
+    top: -14px; left: -20px;
+    animation: floatY 4s ease-in-out infinite;
+  }
+  .float-badge.br {
+    bottom: -14px; right: -20px;
+    animation: floatY 4s ease-in-out infinite 2s;
+  }
+
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover {
+    border-color: rgba(0,212,255,0.2);
+    background: var(--surface2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .card:hover::before { opacity: 1; }
+
+  /* ── ABOUT ── */
+  #about { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 0.97rem;
+    color: var(--text3);
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 0.82rem;
+    transition: all 0.25s;
+  }
+  .value-item:hover {
+    border-color: rgba(0,212,255,0.2);
+    background: var(--surface2);
+  }
+
+  .value-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .value-text strong {
+    display: block;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .value-text span {
+    color: var(--text2);
+    font-size: 0.78rem;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience {}
+
+  .exp-list { display: flex; flex-direction: column; gap: 24px; }
+
+  .exp-card {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .exp-date {
+    font-size: 0.78rem;
+    color: var(--cyan);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-top: 4px;
+    text-align: right;
+    border-right: 1px solid rgba(0,212,255,0.2);
+    padding-right: 28px;
+  }
+
+  .exp-content {}
+
+  .exp-company {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .company-logo {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .exp-company-name {
+    font-size: 0.82rem;
+    color: var(--cyan);
+    font-weight: 500;
+  }
+
+  .exp-bullets {
+    margin-top: 14px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .exp-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: var(--text3);
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    color: var(--cyan);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,212,255,0.07);
+    border: 1px solid rgba(0,212,255,0.15);
+    color: var(--cyan);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  .badge.gold {
+    background: rgba(245,200,66,0.08);
+    border-color: rgba(245,200,66,0.2);
+    color: var(--gold);
+  }
+
+  .badge.violet {
+    background: rgba(139,92,246,0.08);
+    border-color: rgba(139,92,246,0.2);
+    color: #a78bfa;
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--bg2); }
+
+  .edu-card {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .edu-logo {
+    width: 80px; height: 80px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(139,92,246,0.1));
+    border: 1px solid rgba(0,212,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .edu-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .edu-degree {
+    color: var(--text2);
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+  }
+
+  .gpa-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .gpa-label {
+    font-size: 0.75rem;
+    color: var(--text2);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+    animation: barGrow 1.5s ease-out forwards;
+    transform-origin: left;
+  }
+
+  @keyframes barGrow {
+    from { width: 0%; }
+    to { width: 90%; }
+  }
+
+  .gpa-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--cyan);
+    white-space: nowrap;
+  }
+
+  /* ── SKILLS ── */
+  #skills {}
+
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .skill-category h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .skill-category h3::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .skill-items { display: flex; flex-direction: column; gap: 14px; }
+
+  .skill-item {}
+
+  .skill-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 7px;
+  }
+
+  .skill-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.87rem;
+    font-weight: 500;
+  }
+
+  .skill-pct {
+    font-size: 0.75rem;
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  .skill-track {
+    height: 5px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .tool-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 13px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text3);
+    transition: all 0.25s;
+  }
+  .tool-chip:hover {
+    border-color: rgba(0,212,255,0.25);
+    color: var(--cyan);
+    background: rgba(0,212,255,0.05);
+  }
+
+  /* ── ACHIEVEMENTS ── */
+  #achievements { background: var(--bg2); }
+
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .ach-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .ach-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; top: 0;
+    background: radial-gradient(ellipse at bottom left, rgba(0,212,255,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .ach-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0,212,255,0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .ach-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  .ach-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .ach-desc {
+    font-size: 0.8rem;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  .ach-org {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--cyan);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications {}
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cert-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: all 0.25s;
+  }
+
+  .cert-card:hover {
+    border-color: rgba(0,212,255,0.2);
+    background: var(--surface2);
+    transform: translateY(-3px);
+  }
+
+  .cert-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .cert-icon.blue { background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2); }
+  .cert-icon.gold { background: rgba(245,200,66,0.1); border: 1px solid rgba(245,200,66,0.2); }
+  .cert-icon.violet { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); }
+  .cert-icon.green { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); }
+
+  .cert-info h4 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    line-height: 1.3;
+  }
+
+  .cert-issuer {
+    font-size: 0.75rem;
+    color: var(--cyan);
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .cert-desc {
+    font-size: 0.76rem;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+
+  /* ── SEMINARS ── */
+  #seminars { background: var(--bg2); }
+
+  .seminar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .seminar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.25s;
+  }
+  .seminar-item:hover {
+    border-color: rgba(0,212,255,0.18);
+    background: var(--surface2);
+  }
+
+  .seminar-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    flex-shrink: 0;
+    margin-top: 7px;
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  .seminar-text {
+    font-size: 0.87rem;
+    color: var(--text3);
+    line-height: 1.55;
+  }
+
+  .seminar-text strong {
+    color: var(--text);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ── CONTACT SECTION ── */
+  #contact {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center bottom, rgba(0,212,255,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .contact-info p {
+    font-size: 0.95rem;
+    color: var(--text2);
+    margin-bottom: 36px;
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .contact-link:hover {
+    border-color: rgba(0,212,255,0.25);
+    background: rgba(0,212,255,0.05);
+    transform: translateX(4px);
+  }
+
+  .cl-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .cl-label {
+    font-size: 0.7rem;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .cl-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* AI Feature Box */
+  .ai-box {
+    background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(139,92,246,0.06));
+    border: 1px solid rgba(0,212,255,0.18);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-box::before {
+    content: '✦ AI';
+    position: absolute;
+    top: 16px; right: 20px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    background: rgba(0,212,255,0.1);
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(0,212,255,0.2);
+  }
+
+  .ai-box h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .ai-box p {
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .ai-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text2);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer span { color: var(--cyan); }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* ── ANIMATIONS ON SCROLL (simple CSS) ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── AI PROFILE METRIC ── */
+  .ai-profile-section {
+    background: var(--bg2);
+  }
+
+  .ai-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .ai-metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .ai-metric:hover {
+    border-color: rgba(0,212,255,0.25);
+    transform: translateY(-3px);
+  }
+
+  .ai-metric::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .ai-metric:hover::before { transform: scaleX(1); }
+
+  .am-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+
+  .am-label {
+    font-size: 0.73rem;
+    color: var(--text2);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── ORG EXP ── */
+  .org-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .org-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .org-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .org-card:hover { border-color: rgba(0,212,255,0.2); transform: translateY(-4px); }
+  .org-card:hover::before { opacity: 1; }
+
+  .org-icon {
+    font-size: 1.8rem;
+    margin-bottom: 14px;
+  }
+
+  .org-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .org-org {
+    font-size: 0.75rem;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .org-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .org-list li {
+    font-size: 0.78rem;
+    color: var(--text2);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .org-list li::before {
+    content: '·';
+    color: var(--cyan);
+    font-size: 1.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .hero-inner, .about-grid, .skills-layout, .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-avatar-wrap { order: -1; max-width: 300px; margin: 0 auto; }
+    .achievements-grid, .org-grid { grid-template-columns: 1fr 1fr; }
+    .ai-metrics { grid-template-columns: 1fr 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .exp-card { grid-template-columns: 1fr; }
+    .exp-date { text-align: left; border-right: none; border-bottom: 1px solid rgba(0,212,255,0.2); padding-right: 0; padding-bottom: 10px; }
+    nav { padding: 14px 20px; }
+    .container { padding: 0 20px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AHP <span style="color:var(--text2);font-weight:300">/ Portfolio</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-tag">
+          <span class="dot"></span>
+          Active Researcher · Open for Opportunities
+        </div>
+        <h1 class="hero-name">
+          Arpin<br>
+          <span class="highlight">Hamonangan</span><br>
+          Pasaribu
+        </h1>
+        <p class="hero-role">
+          <strong>HR Management</strong> · Finance · Data Analytics · Digital Creator<br>
+          Universitas Mitra Bangsa · GPA 3.60/4.0
+        </p>
+        <p class="hero-desc">
+          Final-year HRM student dengan 3+ tahun pengalaman nyata di Bank Central Asia — mengolah data operasional banking menjadi keputusan berbasis insight. Mengintegrasikan disiplin banking-grade, analitik HR, dan kreativitas digital untuk menciptakan dampak yang terukur.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">✉ Hubungi Saya</a>
+          <a href="#experience" class="btn btn-ghost">Lihat Pengalaman →</a>
+        </div>
+        <div class="hero-contacts">
+          <div class="contact-chip"><div class="ico">📞</div> 0838-9412-4067</div>
+          <div class="contact-chip"><div class="ico">✉</div> arpinhaholongan@gmail.com</div>
+          <div class="contact-chip"><div class="ico">📍</div> Kemayoran, Jakarta Pusat</div>
+          <div class="contact-chip"><div class="ico">📸</div> @arviyy</div>
+        </div>
+      </div>
+
+      <div class="hero-avatar-wrap">
+        <div class="float-badge tl">🏆 Top 30 Bluecaster Nasional</div>
+        <div class="avatar-card">
+          <div class="avatar-inner">
+            <div class="avatar-img">👨‍💼</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:4px">Arpin H. Pasaribu</div>
+            <div style="font-size:0.75rem;color:var(--text2)">HR · Finance · AI Enthusiast</div>
+            <div class="stat-grid">
+              <div class="stat-item">
+                <span class="stat-num">3+</span>
+                <span class="stat-label">Tahun BCA</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">3.60</span>
+                <span class="stat-label">GPA</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">617</span>
+                <span class="stat-label">TOEFL Score</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">2</span>
+                <span class="stat-label">Paper Aktif</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float-badge br">⭐ Top 50 SSRP 2024 BCA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ AI METRICS ══════════════════ -->
+<section class="ai-profile-section" style="padding:60px 0">
+  <div class="container">
+    <div class="section-label">✦ AI-Powered Profile Snapshot</div>
+    <div class="ai-metrics fade-in">
+      <div class="ai-metric">
+        <span class="am-value">500+</span>
+        <div class="am-label">Transaksi / Minggu di BCA</div>
+      </div>
+      <div class="ai-metric">
+        <span class="am-value">95%+</span>
+        <div class="am-label">Customer Satisfaction Score</div>
+      </div>
+      <div class="ai-metric">
+        <span class="am-value">100%</span>
+        <div class="am-label">Akurasi Rekonsiliasi Harian</div>
+      </div>
+      <div class="ai-metric">
+        <span class="am-value">20%</span>
+        <div class="am-label">Peningkatan Adopsi Produk</div>
+      </div>
+    </div>
+    <div class="ai-metrics fade-in">
+      <div class="ai-metric">
+        <span class="am-value">90%</span>
+        <div class="am-label">Revenue Growth (Zoya, 3 bln)</div>
+      </div>
+      <div class="ai-metric">
+        <span class="am-value">40%</span>
+        <div class="am-label">Peningkatan Literasi Siber BCA</div>
+      </div>
+      <div class="ai-metric">
+        <span class="am-value">30%</span>
+        <div class="am-label">Pengurangan Risiko Digital BCA</div>
+      </div>
+      <div class="ai-metric">
+        <span class="am-value">25%</span>
+        <div class="am-label">Peningkatan Engagement Konten</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ ABOUT ══════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Tentang Saya</div>
+    <div class="section-title">Siapa <span class="highlight">Arpin?</span></div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>Saya adalah mahasiswa tingkat akhir semester 7 jurusan <strong style="color:var(--text)">Manajemen Sumber Daya Manusia</strong> di Universitas Mitra Bangsa, Jakarta Selatan — dengan pengalaman kerja langsung lebih dari 3 tahun di Bank Central Asia sebagai Teller, Bluecaster Content Creator, dan Cybersecurity Analyst (Digital Buddy Team).</p>
+        <p>Latar belakang perbankan saya memberikan disiplin presisi tingkat banking-grade yang kini saya terapkan dalam analitik HR dan pengembangan sumber daya manusia. Saya memproses data operasional nyata setiap hari dan mengubahnya menjadi keputusan berbasis insight.</p>
+        <p>Saya juga seorang digital creator yang telah meraih Top 30 di kompetisi nasional BCA Bluecaster — menggabungkan kemampuan analitis dan kreativitas untuk menciptakan konten bilingual yang berdampak.</p>
+        <p>Saat ini aktif dalam upskilling di bidang <strong style="color:var(--cyan)">People Analytics, Python, Streamlit, Google Looker Studio,</strong> dan <strong style="color:var(--cyan)">AI Fundamentals</strong> untuk mempersiapkan diri menjadi HR Data Analyst yang kompeten di era digital.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-item">
+          <div class="value-icon">🎯</div>
+          <div class="value-text">
+            <strong>Data-Driven</strong>
+            <span>Keputusan berbasis data, bukan intuisi semata</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🤖</div>
+          <div class="value-text">
+            <strong>AI Enthusiast</strong>
+            <span>Aktif belajar Python, AI, & People Analytics</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🏦</div>
+          <div class="value-text">
+            <strong>Banking Precision</strong>
+            <span>3+ tahun disiplin operasional perbankan</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🎬</div>
+          <div class="value-text">
+            <strong>Digital Creator</strong>
+            <span>Konten bilingual, Instagram, TikTok, YouTube</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🤝</div>
+          <div class="value-text">
+            <strong>People-Centric</strong>
+            <span>HR sebagai jembatan antara bisnis & manusia</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🔐</div>
+          <div class="value-text">
+            <strong>Cybersecurity Aware</strong>
+            <span>Digital Buddy Team BCA, fraud prevention</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ EDUCATION ══════════════════ -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">Pendidikan</div>
+    <div class="section-title"><span class="highlight">Latar Belakang</span> Akademik</div>
+
+    <div class="card fade-in" style="margin-bottom:20px">
+      <div class="edu-card">
+        <div class="edu-logo">🎓</div>
+        <div class="edu-info" style="flex:1">
+          <h3>Universitas Mitra Bangsa (UMIBA)</h3>
+          <div class="edu-degree">S1 Manajemen Sumber Daya Manusia &nbsp;·&nbsp; Agustus 2022 – Juli 2026 (Expected)</div>
+          <div class="gpa-bar">
+            <span class="gpa-label">GPA</span>
+            <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
+            <span class="gpa-value">3.60 / 4.00</span>
+          </div>
+          <div class="badge-row" style="margin-top:14px">
+            <span class="badge">Organizational Behavior</span>
+            <span class="badge">Talent Acquisition</span>
+            <span class="badge">Financial Management</span>
+            <span class="badge">Strategic HR</span>
+            <span class="badge">People Analytics</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--text2);margin-top:12px">Jakarta Selatan · Aktif di seminar bisnis dan proyek pengembangan organisasi</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="edu-card">
+        <div class="edu-logo">🌾</div>
+        <div class="edu-info" style="flex:1">
+          <h3>SMK Negeri 1 Huristak</h3>
+          <div class="edu-degree">Agribisnis Tanaman Perkebunan &nbsp;·&nbsp; Maret 2015 – Mei 2018</div>
+          <div class="badge-row" style="margin-top:10px">
+            <span class="badge gold">🥇 Juara 1 Semester X, XI, XII</span>
+            <span class="badge gold">🏆 Siswa Berprestasi</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--text2);margin-top:12px">Meraih peringkat 1 selama 4 semester berturut-turut di program Agribisnis Tanaman Perkebunan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ EXPERIENCE ══════════════════ -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Pengalaman Kerja</div>
+    <div class="section-title">Rekam Jejak <span class="highlight">Profesional</span></div>
+
+    <div class="exp-list">
+
+      <!-- BCA -->
+      <div class="card fade-in">
+        <div class="exp-card">
+          <div class="exp-date">Juli 2022<br>— Sekarang</div>
+          <div class="exp-content">
+            <div class="exp-company">
+              <div class="company-logo">🏦</div>
+              <div>
+                <div class="exp-role">Teller</div>
+                <div class="exp-company-name">PT Bank Central Asia Tbk (BCA)</div>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Memproses 500+ transaksi keuangan per minggu (tabungan, deposito, transfer, valas) menggunakan BCASys dan laporan rekonsiliasi harian berbasis Excel, dengan target zero-error.</li>
+              <li>Mempertahankan customer satisfaction score 95%+ selama 3+ tahun melalui layanan responsif dan solusi tepat sasaran; menyelesaikan keluhan di hari yang sama.</li>
+              <li>Mendorong peningkatan adopsi produk nasabah sebesar 20% dengan mengidentifikasi profil keuangan nasabah dan merekomendasikan produk BCA yang relevan.</li>
+              <li>Menjaga akurasi rekonsiliasi 100% dan memastikan zero compliance errors dalam pelaporan harian.</li>
+              <li>Berkolaborasi dengan tim internal untuk meningkatkan alur kerja operasional, mengurangi waktu pemrosesan transaksi sebesar 20%.</li>
+              <li>Mempromosikan solusi perbankan digital dan mengedukasi nasabah tentang platform BCA (myBCA, BCA mobile, KlikBCA).</li>
+            </ul>
+            <div class="badge-row">
+              <span class="badge gold">✦ Kompeten Teller — Service Excellence (2022–23)</span>
+              <span class="badge gold">✦ Kompeten Teller — Banking Solutions (2023–24)</span>
+              <span class="badge gold">✦ Kompeten Teller — Customer Experience (2024–25)</span>
+              <span class="badge">Vocational Teller Internship</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zoya Shafira -->
+      <div class="card fade-in">
+        <div class="exp-card">
+          <div class="exp-date">Mei 2022<br>— Juli 2022</div>
+          <div class="exp-content">
+            <div class="exp-company">
+              <div class="company-logo">👗</div>
+              <div>
+                <div class="exp-role">Marketing Field Assistant</div>
+                <div class="exp-company-name">PT Shafira Laras Persada (Zoya Shafira)</div>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Mencapai pertumbuhan revenue 90% dibandingkan periode kampanye sebelumnya melalui strategi pemasaran lapangan berbasis data di seluruh DKI Jakarta.</li>
+              <li>Melakukan riset pasar di 10+ lokasi menggunakan panduan wawancara terstruktur; mengompilasi temuan di Google Sheets dan Forms untuk menghasilkan pesan promosi yang terlokalisasi.</li>
+              <li>Mendukung kampanye brand, mengorganisir event promosi, dan berkolaborasi pada materi pemasaran.</li>
+              <li>Menganalisis KPI kampanye mingguan (conversion rate, revenue harian per lokasi) menggunakan pivot table Excel untuk mengidentifikasi wilayah berperforma terbaik.</li>
+              <li>Meningkatkan keterlibatan pelanggan melalui outreach bertarget dan strategi pemasaran kreatif.</li>
+            </ul>
+            <div class="badge-row">
+              <span class="badge gold">⚡ 90% Revenue Growth dalam 3 bulan</span>
+              <span class="badge">Field Marketing</span>
+              <span class="badge">Market Research</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pasar Swalayan -->
+      <div class="card fade-in">
+        <div class="exp-card">
+          <div class="exp-date">Sept 2018<br>— Mei 2022</div>
+          <div class="exp-content">
+            <div class="exp-company">
+              <div class="company-logo">🛒</div>
+              <div>
+                <div class="exp-role">Administrative Assistant</div>
+                <div class="exp-company-name">Pasar Swalayan Maju Bersama</div>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Mengelola catatan inventaris stok untuk 200+ SKU di berbagai kategori produk menggunakan Microsoft Excel, melacak pengiriman masuk, level stok, dan reorder point setiap hari.</li>
+              <li>Menyiapkan laporan operasional mingguan dan bulanan untuk manajemen toko — digunakan langsung untuk keputusan pembelian dan perencanaan anggaran.</li>
+              <li>Mengelola penjadwalan staf untuk 15+ karyawan toko lintas shift, memastikan coverage memadai selama jam sibuk dan hari restocking.</li>
+              <li>Membangun kemampuan dasar dalam data entry, pelaporan operasional, dan alur kerja administratif selama 3,5 tahun.</li>
+            </ul>
+            <div class="badge-row">
+              <span class="badge">Inventory Management</span>
+              <span class="badge">Operational Reporting</span>
+              <span class="badge">Staff Scheduling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ ORGANIZATIONAL ══════════════════ -->
+<section style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">Pengalaman Organisasi</div>
+    <div class="section-title">Peran <span class="highlight">Organisasional</span></div>
+    <div class="org-grid">
+
+      <div class="org-card fade-in">
+        <div class="org-icon">🎥</div>
+        <div class="org-title">Digital Content Creator</div>
+        <div class="org-org">BCA Bluecaster Nasional · 2023–Sekarang</div>
+        <ul class="org-list">
+          <li>Membuat konten digital (video, reels, posts) untuk produk keuangan BCA seperti myBCA, BCA mobile, KlikBCA.</li>
+          <li>Menyampaikan konten bilingual (Bahasa Indonesia/Inggris) untuk memperkuat brand presence BCA.</li>
+          <li>Berkolaborasi dengan kreator se-Indonesia untuk menjaga konsistensi branding dan tone of voice.</li>
+          <li>Menganalisis digital metrics untuk meningkatkan jangkauan konten di Instagram, TikTok, dan YouTube.</li>
+        </ul>
+        <div style="margin-top:14px"><span class="badge gold">🏆 Top 30 Nasional</span></div>
+      </div>
+
+      <div class="org-card fade-in">
+        <div class="org-icon">🔐</div>
+        <div class="org-title">Cybersecurity Advocate</div>
+        <div class="org-org">BCA Digital Buddy Team · 2024–Sekarang</div>
+        <ul class="org-list">
+          <li>Dipilih bergabung dalam task force siber internal cabang BCA.</li>
+          <li>Mengedukasi staf dan nasabah tentang praktik perbankan digital yang aman.</li>
+          <li>Memantau ancaman dan bekerja sama dengan tim cybersecurity pusat.</li>
+          <li>Membantu simulasi untuk meningkatkan cyber-resilience bank; meningkatkan literasi siber sebesar 40%.</li>
+          <li>Mengurangi risiko keamanan digital sebesar 30% melalui identifikasi dan mitigasi ancaman.</li>
+        </ul>
+      </div>
+
+      <div class="org-card fade-in">
+        <div class="org-icon">💡</div>
+        <div class="org-title">Team Member — BCA Innovation Award</div>
+        <div class="org-org">BCA BIA · Kenwil 10</div>
+        <ul class="org-list">
+          <li>Berpartisipasi dalam brainstorming dan drafting ide inovatif untuk peningkatan layanan perbankan.</li>
+          <li>Mempresentasikan proposal di tingkat regional (Kenwil 10).</li>
+          <li>Mengembangkan skill teamwork, creative problem-solving, dan strategic thinking.</li>
+        </ul>
+        <div style="margin-top:14px"><span class="badge">Regional Presenter</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ SKILLS ══════════════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Keahlian</div>
+    <div class="section-title">Hard & Soft <span class="highlight">Skills</span></div>
+
+    <div class="skills-layout fade-in">
+      <div>
+        <div class="skill-category">
+          <h3>Hard Skills</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">📊 Data Analysis & Visualization</div>
+                <span class="skill-pct">85%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">👥 HR Analytics & Frameworks</div>
+                <span class="skill-pct">80%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">🏦 Banking & Financial Literacy</div>
+                <span class="skill-pct">90%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">📱 Social Media Content Creation</div>
+                <span class="skill-pct">85%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">🔐 Cybersecurity Awareness</div>
+                <span class="skill-pct">75%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:75%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">🐍 Python (EDA, Streamlit)</div>
+                <span class="skill-pct">65%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:65%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="skill-category">
+          <h3>Soft Skills</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">🗣 Communication & Presentation</div>
+                <span class="skill-pct">90%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">🧠 Critical Thinking & Problem Solving</div>
+                <span class="skill-pct">85%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">🤝 Teamwork & Collaboration</div>
+                <span class="skill-pct">92%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:92%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">⭐ Customer Service Excellence</div>
+                <span class="skill-pct">95%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:95%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">🎯 Ethical & Service-Oriented Mindset</div>
+                <span class="skill-pct">90%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">⏱ Time Management & Multitasking</div>
+                <span class="skill-pct">88%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" style="width:88%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px">
+      <div class="section-label" style="margin-bottom:16px">🛠 Tools & Technologies</div>
+      <div class="tools-grid">
+        <div class="tool-chip">📊 Microsoft Excel (Advanced)</div>
+        <div class="tool-chip">📈 Google Looker Studio</div>
+        <div class="tool-chip">🐍 Python · Pandas · Streamlit</div>
+        <div class="tool-chip">☁️ Google Cloud Platform</div>
+        <div class="tool-chip">🎨 Canva</div>
+        <div class="tool-chip">📹 CapCut · VN Editor</div>
+        <div class="tool-chip">📝 Microsoft Word & PowerPoint</div>
+        <div class="tool-chip">📋 Google Workspace</div>
+        <div class="tool-chip">🤝 Microsoft Teams</div>
+        <div class="tool-chip">🤖 AI Tools (ChatGPT, Claude)</div>
+        <div class="tool-chip">📊 Pivot Tables · VLOOKUP</div>
+        <div class="tool-chip">🗄 HRIS Fundamentals</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ ACHIEVEMENTS ══════════════════ -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-label">Pencapaian</div>
+    <div class="section-title">Penghargaan & <span class="highlight">Prestasi</span></div>
+    <div class="achievements-grid">
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-title">Top 30 Finalist — National Bluecaster Competition</div>
+        <div class="ach-desc">Terpilih sebagai Top 30 dari ribuan peserta se-Indonesia dalam kompetisi content creator digital nasional BCA. Membuat konten bilingual untuk produk keuangan BCA dan kampanye digital di Instagram, TikTok, YouTube.</div>
+        <div class="ach-org">PT Bank Central Asia Tbk · 2023</div>
+      </div>
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">⭐</div>
+        <div class="ach-title">Top 50 Participant — SSRP 2024 BCA (Regional Kanwil 10)</div>
+        <div class="ach-desc">Terpilih sebagai Top 50 peserta regional dalam BCA Smart Solution Reward Program — program inovasi kompetitif yang mendorong ide cerdas untuk operasional perbankan dan customer service. Proposal menunjukkan kreativitas, efisiensi operasional, dan nilai nasabah.</div>
+        <div class="ach-org">PT Bank Central Asia Tbk · 2024</div>
+      </div>
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">🎖</div>
+        <div class="ach-title">Winner — BCA Internal Content Creator Competition</div>
+        <div class="ach-desc">Memenangkan kompetisi content creator internal BCA dengan menciptakan konten digital yang berdampak untuk mendukung inisiatif branding BCA, termasuk MyBCA Birthday Special Comic Competition.</div>
+        <div class="ach-org">PT Bank Central Asia Tbk</div>
+      </div>
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">🥇</div>
+        <div class="ach-title">Juara 1 Overall — SMP Negeri 2 Huristak</div>
+        <div class="ach-desc">Meraih predikat Juara 1 Umum (Siswa Berprestasi) di tingkat kabupaten dan sekolah pada Semester Genap 2012/2013, diakui oleh Dinas Pendidikan Kabupaten Padang Lawas.</div>
+        <div class="ach-org">SMP Negeri 2 Huristak · 2013</div>
+      </div>
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">📚</div>
+        <div class="ach-title">Juara 1 — 4 Semester Berturut-turut di SMK</div>
+        <div class="ach-desc">Meraih peringkat pertama secara konsisten selama empat semester (Kelas X–XII) di program Agribisnis Tanaman Perkebunan, SMK Negeri 1 Huristak, 2015–2018.</div>
+        <div class="ach-org">SMK Negeri 1 Huristak · 2015–2018</div>
+      </div>
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">🌐</div>
+        <div class="ach-title">TOEFL-Like Score 617</div>
+        <div class="ach-desc">Meraih skor TOEFL-Like 617 yang mencerminkan kemampuan bahasa Inggris profesional, mendukung pembuatan konten bilingual dan komunikasi internasional.</div>
+        <div class="ach-org">Kingdom English Course Malang · September 2024</div>
+      </div>
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">🎨</div>
+        <div class="ach-title">Juara 2 — Lomba Poster Ramadhan</div>
+        <div class="ach-desc">Meraih Juara 2 dalam kompetisi desain poster Ramadhan tingkat universitas, menunjukkan kemampuan visual storytelling dan kreativitas desain digital dalam konteks komunikasi kampanye.</div>
+        <div class="ach-org">Universitas Mitra Bangsa · 2026</div>
+      </div>
+
+      <div class="ach-card fade-in">
+        <div class="ach-icon">💻</div>
+        <div class="ach-title">TOP 800 — PIDI · DIGDAYA X Hackathon 2026</div>
+        <div class="ach-desc">Masuk dalam TOP 800 peserta nasional pada PIDI – DIGDAYA X Hackathon 2026, kompetisi inovasi digital bergengsi yang menantang peserta membangun solusi teknologi berdampak untuk transformasi industri Indonesia.</div>
+        <div class="ach-org">PIDI · DIGDAYA X · 2026</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ CERTIFICATIONS ══════════════════ -->
+<section id="certifications" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">Sertifikasi & Pelatihan</div>
+    <div class="section-title">Kompetensi yang <span class="highlight">Tersertifikasi</span></div>
+    <div class="cert-grid fade-in">
+
+      <div class="cert-card">
+        <div class="cert-icon blue">🤖</div>
+        <div class="cert-info">
+          <h4>Data Analysis Fundamentals — Python, EDA, Streamlit</h4>
+          <div class="cert-issuer">Upskilling 2025–2026 · 70 Jam</div>
+          <div class="cert-desc">Python, Exploratory Data Analysis, Streamlit dashboard, data wrangling untuk HR analytics dan business intelligence.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon blue">☁️</div>
+        <div class="cert-info">
+          <h4>AI Fundamentals & Google Cloud Platform Fundamentals</h4>
+          <div class="cert-issuer">Google Cloud · 2025–2026</div>
+          <div class="cert-desc">Pemahaman fondasi AI/ML, practical AI for productivity, dan Google Cloud Platform untuk data dan analytics.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon gold">📊</div>
+        <div class="cert-info">
+          <h4>Index Match, VLOOKUP & HLOOKUP in Ms. Excel</h4>
+          <div class="cert-issuer">MySkill Short Class · April 17, 2025</div>
+          <div class="cert-desc">Advanced Excel lookup functions untuk pemrosesan data yang efisien, otomatisasi spreadsheet, dan analitik bisnis.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon violet">👥</div>
+        <div class="cert-info">
+          <h4>Understanding HR Frameworks</h4>
+          <div class="cert-issuer">MySkill Short Class · March 2, 2025</div>
+          <div class="cert-desc">Strategic HR Management: menyelaraskan strategi HR dengan tujuan organisasi, performance management, talent development, employee engagement.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon blue">📈</div>
+        <div class="cert-info">
+          <h4>Data Visualization with Microsoft Excel</h4>
+          <div class="cert-issuer">MySkill Short Class · March 1, 2025</div>
+          <div class="cert-desc">Keahlian charts, pivot tables, conditional formatting; pembuatan dashboard dan visual storytelling untuk keputusan bisnis.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon violet">🧠</div>
+        <div class="cert-info">
+          <h4>Human Resources: People Analytics</h4>
+          <div class="cert-issuer">MySkill Short Class · February 12–26, 2023</div>
+          <div class="cert-desc">Fundamentals of HR data application, Google Sheets untuk dashboard, insights-driven decision making dalam recruitment, retention, dan development.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon green">🎯</div>
+        <div class="cert-info">
+          <h4>Line Management Essential Skills and Concepts</h4>
+          <div class="cert-issuer">Alison — CPD Certified</div>
+          <div class="cert-desc">Performance supervision, team motivation, operational planning; staff development, conflict resolution, dan productivity enhancement.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon blue">🏦</div>
+        <div class="cert-info">
+          <h4>Banking Solutions & Service Excellence Training</h4>
+          <div class="cert-issuer">PT Bank Central Asia Tbk · 2022–2025</div>
+          <div class="cert-desc">Trained in customer service excellence, problem resolution, dan high-value transaction management. Kompeten Teller 3 siklus berturut-turut.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon green">🔐</div>
+        <div class="cert-info">
+          <h4>Cybersecurity Awareness Training</h4>
+          <div class="cert-issuer">BCA Digital Buddy Team · 2024</div>
+          <div class="cert-desc">Hands-on expertise dalam fraud detection, phishing prevention, dan cybersecurity protocols perbankan digital.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon gold">🏅</div>
+        <div class="cert-info">
+          <h4>Public Speaking & Team Building Certification</h4>
+          <div class="cert-issuer">2025</div>
+          <div class="cert-desc">Enhanced leadership, communication, dan presentation skills untuk lingkungan profesional dan organisasional.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon blue">🐍</div>
+        <div class="cert-info">
+          <h4>Getting Started with Programming with Python</h4>
+          <div class="cert-issuer">Dicoding Indonesia</div>
+          <div class="cert-desc">Fondasi pemrograman Python: variabel, tipe data, struktur kontrol, fungsi, dan OOP — sebagai landasan untuk data analytics dan pengembangan aplikasi berbasis AI.</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon blue">🤖</div>
+        <div class="cert-info">
+          <h4>Advancing My Digital Literacy with Artificial Intelligence</h4>
+          <div class="cert-issuer">Dicoding Indonesia</div>
+          <div class="cert-desc">Pemahaman mendalam tentang konsep AI, machine learning, dan aplikasi AI dalam dunia kerja; meningkatkan produktivitas digital dengan memanfaatkan teknologi kecerdasan buatan secara strategis dan etis.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ SEMINARS ══════════════════ -->
+<section id="seminars">
+  <div class="container">
+    <div class="section-label">Seminar & Webinar</div>
+    <div class="section-title">Pengembangan <span class="highlight">Pengetahuan</span></div>
+    <div class="seminar-list fade-in">
+
+      <div class="seminar-item">
+        <div class="seminar-dot"></div>
+        <div class="seminar-text">
+          <strong>Webinar Nasional — Mewujudkan Transformasi Digital Menuju Indonesia Emas</strong>
+          Universitas Mitra Bangsa · Desember 2024 · Pembicara: Prof. Dr. Toni Toharudin, Laksemana TNI (Purn), Mayor Jenderal TNI (Mar)
+        </div>
+      </div>
+
+      <div class="seminar-item">
+        <div class="seminar-dot"></div>
+        <div class="seminar-text">
+          <strong>Webinar Nasional — Inovasi Digital, Transformasi Layanan, dan Dinamika Hukum Perlindungan Data</strong>
+          Universitas Mitra Bangsa · Februari 2025 · Kolaborasi FTI dan Fakultas Hukum
+        </div>
+      </div>
+
+      <div class="seminar-item">
+        <div class="seminar-dot"></div>
+        <div class="seminar-text">
+          <strong>Seminar Nasional — Optimalisasi Minat dan Bakat Generasi Millenial dalam Meraih Kesuksesan</strong>
+          STIManajemen IMMI · Februari 4, 2023 · Pembicara: Hj. Sri Wahyuningsih, SE.,MM.
+        </div>
+      </div>
+
+      <div class="seminar-item">
+        <div class="seminar-dot"></div>
+        <div class="seminar-text">
+          <strong>Seminar Nasional — Public Speaking and Team Building</strong>
+          STIManajemen IMMI · Mei 27, 2023 · Pembicara: Dr. Bambang Nurakhin, MM.
+        </div>
+      </div>
+
+      <div class="seminar-item">
+        <div class="seminar-dot"></div>
+        <div class="seminar-text">
+          <strong>Webinar Nasional — Aspek Akuntansi dan Perpajakan Pengadaan Barang dan Jasa</strong>
+          Ruang Seminar · November 21, 2024 · Pemateri: Raden Agus Suparman SE., SAk., MSi
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ AI BOX ══════════════════ -->
+<section style="background:var(--bg2);padding:60px 0">
+  <div class="container">
+    <div class="ai-box fade-in">
+      <h3>🤖 Visi Saya sebagai HR + AI Professional</h3>
+      <p>
+        Tim HR yang mengandalkan intuisi semata tanpa data akan melewatkan sinyal penting yang memprediksi turnover, disengagement, dan hiring mismatch. Saya membantu menjembatani kesenjangan itu — menggabungkan disiplin banking-grade precision dengan tools people analytics untuk membuat keputusan workforce yang lebih cepat, lebih adil, dan lebih akurat.
+      </p>
+      <p>
+        Dengan fondasi 3+ tahun data operasional nyata dari BCA dan upskilling aktif di Python, Streamlit, Google Looker Studio, dan AI Fundamentals — saya siap bertransisi menjadi <strong style="color:var(--text)">People Analytics Analyst · HR Data Analyst · Human Capital Specialist</strong> yang membawa value nyata bagi organisasi.
+      </p>
+      <div class="ai-tags">
+        <span class="badge">🐍 Python</span>
+        <span class="badge">📊 Streamlit</span>
+        <span class="badge">📈 Google Looker Studio</span>
+        <span class="badge">☁️ Google Cloud</span>
+        <span class="badge">🤖 AI Fundamentals</span>
+        <span class="badge">👥 People Analytics</span>
+        <span class="badge">🏦 Banking-Grade Precision</span>
+        <span class="badge violet">⚡ Open to Opportunities</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ ACTIVE RESEARCH ══════════════════ -->
+<section id="research" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">📝 Riset & Karya Ilmiah Aktif</div>
+    <div class="section-title">Paper yang <span class="highlight">Sedang Diikuti</span></div>
+
+    <div style="display:flex;flex-direction:column;gap:24px">
+
+      <div class="card fade-in" style="border-color:rgba(0,212,255,0.2);background:linear-gradient(135deg,rgba(0,212,255,0.04),rgba(139,92,246,0.04))">
+        <div style="display:flex;align-items:flex-start;gap:20px">
+          <div style="width:52px;height:52px;border-radius:14px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">📊</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+              <span class="badge" style="background:rgba(0,212,255,0.12);border-color:rgba(0,212,255,0.3)">🔴 Sedang Berlangsung</span>
+              <span class="badge violet">Konferensi Internasional</span>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;line-height:1.4">
+              "Nowcasting Indonesian Inflation Using Google Trends and Machine Learning: Evidence for Central Bank Real-Time Surveillance"
+            </div>
+            <div style="font-size:0.82rem;color:var(--cyan);font-weight:600;margin-bottom:12px">
+              The 20th BMEB International Conference and Call for Papers · Bank Indonesia
+            </div>
+            <div style="font-size:0.85rem;color:var(--text3);line-height:1.75">
+              Paper ini menginvestigasi pendekatan <strong style="color:var(--text)">nowcasting inflasi Indonesia</strong> menggunakan data Google Trends yang dikombinasikan dengan algoritma <strong style="color:var(--text)">Machine Learning</strong> sebagai alat surveilans real-time bagi Bank Sentral. Penelitian ini menawarkan alternatif sumber data beresolusi tinggi untuk mendukung pengambilan keputusan kebijakan moneter yang lebih responsif dan akurat.
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+              <span class="badge">Machine Learning</span>
+              <span class="badge">Google Trends</span>
+              <span class="badge">Nowcasting</span>
+              <span class="badge">Monetary Policy</span>
+              <span class="badge">Central Bank Analytics</span>
+              <span class="badge">Indonesian Inflation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="border-color:rgba(245,200,66,0.2);background:linear-gradient(135deg,rgba(245,200,66,0.04),rgba(0,212,255,0.04))">
+        <div style="display:flex;align-items:flex-start;gap:20px">
+          <div style="width:52px;height:52px;border-radius:14px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.25);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">🏛</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+              <span class="badge gold">🔴 Sedang Berlangsung</span>
+              <span class="badge gold">OJK Paper Award</span>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;line-height:1.4">
+              "Bridging the Digital Divide: How Integrated Payment Ecosystems and Alternative Credit Scoring Accelerate Financial Inclusion and Economies of Scale for Micro, Small, and Medium Enterprises in Indonesia"
+            </div>
+            <div style="font-size:0.82rem;color:var(--gold);font-weight:600;margin-bottom:12px">
+              KARISMA OJK Paper Award 2026 · OJK Institute — Financial Inclusion and Digital Empowerment of MSMEs
+            </div>
+            <div style="font-size:0.85rem;color:var(--text3);line-height:1.75">
+              Paper ini menganalisis bagaimana <strong style="color:var(--text)">ekosistem pembayaran digital terintegrasi</strong> dan <strong style="color:var(--text)">credit scoring alternatif</strong> dapat menjembatani kesenjangan digital dan mendorong inklusi keuangan bagi UMKM Indonesia. Mengkaji model economies of scale yang memberdayakan pelaku UMKM dalam mengakses layanan keuangan formal di era transformasi digital.
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+              <span class="badge gold">Financial Inclusion</span>
+              <span class="badge gold">Digital Payment</span>
+              <span class="badge gold">Alternative Credit Scoring</span>
+              <span class="badge gold">MSME Empowerment</span>
+              <span class="badge gold">OJK Policy</span>
+              <span class="badge gold">Digital Economy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <div class="section-label">Kontak</div>
+        <h2>Mari <span class="highlight">Terhubung</span><br>& Berkolaborasi</h2>
+        <p>Saya terbuka untuk peluang di bidang People Analytics, HR Data Analyst, Human Capital Specialist, atau People Operations. Mari diskusikan bagaimana latar belakang saya dapat memberikan value bagi organisasi Anda.</p>
+        <div class="contact-links">
+          <a href="tel:+6283894124067" class="contact-link">
+            <div class="cl-icon">📞</div>
+            <div>
+              <div class="cl-label">Telepon / WhatsApp</div>
+              <div class="cl-value">+62 838-9412-4067</div>
+            </div>
+          </a>
+          <a href="mailto:arpinhaholongan@gmail.com" class="contact-link">
+            <div class="cl-icon">✉️</div>
+            <div>
+              <div class="cl-label">Email</div>
+              <div class="cl-value">arpinhaholongan@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/arpinhamonangan-pasaribu-5015ab23b" target="_blank" class="contact-link">
+            <div class="cl-icon">💼</div>
+            <div>
+              <div class="cl-label">LinkedIn</div>
+              <div class="cl-value">Arpin Hamonangan Pasaribu</div>
+            </div>
+          </a>
+          <a href="#" class="contact-link">
+            <div class="cl-icon">📸</div>
+            <div>
+              <div class="cl-label">Instagram</div>
+              <div class="cl-value">@arviyy</div>
+            </div>
+          </a>
+          <div class="contact-link">
+            <div class="cl-icon">📍</div>
+            <div>
+              <div class="cl-label">Lokasi</div>
+              <div class="cl-value">Kemayoran, Jakarta Pusat, Indonesia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="text-align:center;padding:40px 28px">
+          <div style="font-size:3rem;margin-bottom:16px">🚀</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;margin-bottom:10px">Sedang Mencari Peluang Baru</div>
+          <div style="font-size:0.83rem;color:var(--text2);line-height:1.75;margin-bottom:24px">
+            Open untuk posisi:<br>
+            <strong style="color:var(--text)">People Analytics · HR Data Analyst<br>Human Capital Specialist · People Operations<br>HR Business Partner · Talent Acquisition</strong>
+          </div>
+          <div class="badge-row" style="justify-content:center;gap:8px">
+            <span class="badge">Jakarta</span>
+            <span class="badge">Remote OK</span>
+            <span class="badge">Full-time</span>
+          </div>
+          <div style="height:1px;background:var(--border);margin:24px 0"></div>
+          <div style="font-size:0.78rem;color:var(--text2)">
+            Expected Graduation:<br>
+            <strong style="color:var(--gold)">Juli 2026 — Universitas Mitra Bangsa</strong>
+          </div>
+          <div style="height:1px;background:var(--border);margin:16px 0"></div>
+          <div style="font-size:0.78rem;color:var(--text2)">
+            📝 Active Research:<br>
+            <strong style="color:var(--cyan)">2 Papers · BMEB International & OJK Institute</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div style="margin-bottom:10px">
+      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text)">Arpin Hamonangan Pasaribu</span>
+    </div>
+    <div>HR Management · Finance · People Analytics · Digital Creator</div>
+    <div style="margin-top:8px">Dibuat dengan <span>♥</span> · 2025 · Semua hak dilindungi</div>
+  </div>
+</footer>
+
+<script>
+// ── PARTICLES ──
+const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const PARTICLE_COUNT = 70;
+const particles = [];
+
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  particles.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.5 + 0.3,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    alpha: Math.random() * 0.6 + 0.2,
+  });
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(0, 212, 255, ${0.12 * (1 - dist / 120)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // dots
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(0, 212, 255, ${p.alpha})`;
+    ctx.fill();
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+  });
+
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// ── SCROLL REVEAL ──
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => observer.observe(el));
+
+// ── SMOOTH NAV ACTIVE ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  sections.forEach(s => {
+    if (scrollY >= s.offsetTop - 120) {
+      navLinks.forEach(a => a.style.color = '');
+      const link = document.querySelector(`.nav-links a[href="#${s.id}"]`);
+      if (link) link.style.color = 'var(--cyan)';
+    }
+  });
+}, { passive: true });
+</script>
+
+</body>
+</html>
